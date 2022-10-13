@@ -21,7 +21,7 @@ public class Main {
         showResults(items, weight, benefit, result);
     }
 
-    /*Greedy Algorythm itself, returns a 2D Matrix with Final Weight and Price used by each element inside the Backpack
+    /*Returns a 2D Matrix with Final Weight and Price used by each element inside the Backpack
     calls chooseGreater_v method and uses it index returned value to turn the selected v into 0 (so it can't be selected again)
     Repeats the process until the Backpack is completely full*/ 
     private static float[][] fractionaryBackpack(String[] S, float[] W, float[] V, int C) {
