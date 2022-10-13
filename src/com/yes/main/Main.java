@@ -1,6 +1,7 @@
 package com.yes.main;
 
 public class Main {
+    //Main Method, Creates Data to be used by Greedy and calls fractionaryBackpack and showResults methods
     public static void main(String[] args) {
         String[] items = {
             "Rádio", "Notebook", "Violão"
@@ -13,12 +14,17 @@ public class Main {
         };
 
         float[][] result = new float[3][2];
-        result = fracionaryBackpack(items, weight, price, 16);
+        result = fractionaryBackpack(items, weight, price, 16);
 
         showResults(items, weight, price, result);
     }
 
-    private static float[][] fracionaryBackpack(String[] S, float[] W, float[] V, int C) {
+    /*Greedy Algorythm itself, returns a 2D Matrix with Final Weight and Price used by each element inside the Backpack
+    Creates an Average Value (v vector) for each element to be selected, then it calls chooseGreater_v method and uses it index 
+    returned value to turn the selected v into 0 (so it can't be selected again), storage the weight to be put on the Backpack
+    based on the remaining space inside it and storage Final Weight (column 0) and Final Price (column 1) values on x 2D Matrix
+    Repeats the process until the Backpack is completely full*/ 
+    private static float[][] fractionaryBackpack(String[] S, float[] W, float[] V, int C) {
         float[][] x = new float[3][2];
         float[] v = new float[3];
         int P = 0;
@@ -31,7 +37,7 @@ public class Main {
         }
 
         while(P < C) {
-            int index = chooseGreaterVi(v);
+            int index = chooseGreater_v(v);
             v[index] = 0;
 
             float a = Math.min(W[index], C - P);
@@ -44,7 +50,8 @@ public class Main {
         return x;
     }
 
-    private static int chooseGreaterVi(float[] v) {
+    //Choose the Greater v (V / W) value to be selected and returns it index
+    private static int chooseGreater_v(float[] v) {
         float greater = 0;
         int index = 0;
 
@@ -58,6 +65,7 @@ public class Main {
         return index;
     }
 
+    //Show Final Results on Console
     private static void showResults(String[] items, float[] weight, float[] price, float[][] result) {
         for(int i = 0; i < items.length; i++) {
             System.out.println("Name: " + items[i] + " | Weight: " + weight[i] + 
